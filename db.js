@@ -8,20 +8,45 @@ const cn = {
 };
 const db = pgp(cn);
 
-function getTodo(id) {
-    db.any('select * from todos where id = $1', [id])
-        .then(function (data) {
-            // success;
-            console.log(data);
-        })
-        .catch(function (error) {
-            // error;
-            console.log(error);
-        });
+function getOne(id) {
+    return db.oneOrNone('select * from todos where id = $1', [id])
 }
 
-// getTodo(1);
+function getAll() {
+    return db.any('select * from todos');
+}
+
+function getPending() {
+    return db.any('select * from todos where isDone=false');
+}
+
+// getPending()
+//     .then((data) => {
+//         console.log(data);
+//     })
+//     .catch((error) => {
+//         console.log(error);
+//     });
+
+    getAll()
+    .then((data) => {
+        console.log(data);
+    })
+    .catch((error) => {
+        console.log(error);
+    });
+// getOne(1)
+//     .then(function (data) {
+//         // success;
+//         console.log(data);
+//     })
+//     .catch(function (error) {
+//         // error;
+//         console.log('This is error occurred:');
+//         console.log(error);
+//     });
 
 module.exports = {
-    getTodo
+    getOne,
+    getAll
 }
