@@ -41,3 +41,19 @@ where id=3;
 update todos
 set title='feed the amazing pets'
 where id=3;
+
+-- change a todo title and isDone
+update todos
+set title='feed the amazing pets'
+    isDone=true
+where id=3;
+
+-- delete a todo
+delete 
+from todo
+where id=5;
+
+-- delete all done todos
+delete 
+from todo
+where isDone=true;
