@@ -14,6 +14,16 @@ app.get('/', (req,res) => {
         });
 });
 
+app.get('/:id', (req,res) => {
+    Todo.getOne(req.params.id)
+        .then((data) => {
+            console.log(data);
+            res.send(data);
+        }).catch((error) => {
+            res.send(error);
+        });
+});
+
 app.listen(port, () => {
     console.log(`Your server is running at http://localhost:${port}`);
 })
