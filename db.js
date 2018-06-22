@@ -38,8 +38,19 @@ function setFinished(id, isDone) {
 
 function setTitle(id, newTitle) {
     return db.result("update todos set title ='$1#' where id =$2", [newTitle, id]);
-
 }
+
+function add(title) {
+    return db.one("insert into todos (title, isDone) values ('$1#', false) returning id", [title]);
+}
+
+// add('njoy gaming')
+//     .then((data) => {
+//         console.log(data);
+//     })
+//     .catch((error) => {
+//         console.log(error);
+//     });
 
 // setTitle(7, 'feed the awesome pets')
 //     .then((data) => {
@@ -115,5 +126,6 @@ module.exports = {
     searchByTitle,
     deleteById,
     setFinished,
-    setTitle
+    setTitle,
+    add
 }
