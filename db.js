@@ -9,7 +9,7 @@ const cn = {
 const db = pgp(cn);
 
 function getOne(id) {
-    return db.oneOrNone('select * from todos where id = $1', [id])
+    return db.oneOrNone('select * from todos where id = $1', [id]);
 }
 
 function getAll() {
@@ -24,13 +24,25 @@ function getFinished() {
     return db.any('select * from todos where isDone=true');
 }
 
-getFinished()
-    .then((data) => {
-        console.log(data);
-    })
-    .catch((error) => {
-        console.log(error);
-    });
+function searchByTitle(searchString) {
+    return db.any("select * from todos where title ilike '%$1#%'", [searchString]);
+}
+
+// searchByTitle('wash')
+//     .then((data) => {
+//         console.log(data);
+//     })
+//     .catch((error) => {
+//         console.log(error);
+//     });
+
+// getFinished()
+//     .then((data) => {
+//         console.log(data);
+//     })
+//     .catch((error) => {
+//         console.log(error);
+//     });
 
 // getPending()
 //     .then((data) => {
@@ -62,5 +74,6 @@ module.exports = {
     getOne,
     getAll,
     getPending,
-    getFinished
+    getFinished,
+    searchByTitle
 }
