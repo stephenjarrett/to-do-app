@@ -20,6 +20,18 @@ function getPending() {
     return db.any('select * from todos where isDone=false');
 }
 
+function getFinished() {
+    return db.any('select * from todos where isDone=true');
+}
+
+getFinished()
+    .then((data) => {
+        console.log(data);
+    })
+    .catch((error) => {
+        console.log(error);
+    });
+
 // getPending()
 //     .then((data) => {
 //         console.log(data);
@@ -28,13 +40,13 @@ function getPending() {
 //         console.log(error);
 //     });
 
-    getAll()
-    .then((data) => {
-        console.log(data);
-    })
-    .catch((error) => {
-        console.log(error);
-    });
+    // getAll()
+    // .then((data) => {
+    //     console.log(data);
+    // })
+    // .catch((error) => {
+    //     console.log(error);
+    // });
 // getOne(1)
 //     .then(function (data) {
 //         // success;
@@ -48,5 +60,7 @@ function getPending() {
 
 module.exports = {
     getOne,
-    getAll
+    getAll,
+    getPending,
+    getFinished
 }
