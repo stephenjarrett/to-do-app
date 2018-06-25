@@ -22,6 +22,7 @@
 
 {{#each todos}}
     <div class="ul-item">
+        <input type="checkbox" name="Complete" id="">
         <a href="/{{id}}">
         {{title}}:
         {{isdone}} 
@@ -30,9 +31,11 @@
             <input class="edit-button btn" type="button" value="Edit">
         </a>
 
-        <a href="/{{id}}/delete">
-            <input class="delete-button btn" type="button" value="Delete">
-        </a>
+        <form class="delete-form" action="/{{id}}/delete" method="POST">
+            {{!-- <a href="//delete"> --}}
+                <input class="delete-button btn" type="submit" value="Delete">
+            {{!-- </a> --}}
+        </form>
     </div>
 {{/each}}
 </div>

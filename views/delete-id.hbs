@@ -1,0 +1,12 @@
+<h1>Delete this task:</h1>
+<h2>{{title}}</h2>
+
+<h3>Are you sure?</h3>
+<div class="container">
+    <form action="/{{id}}/delete" method="POST">
+        <input class="btn" type="submit" value="Yes">
+        <a href="/">
+            <input class="btn" type="button" value="No">
+        </a>
+    </form>
+</div>

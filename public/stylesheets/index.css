@@ -57,3 +57,6 @@ ul {
      cursor: pointer;
  }
 
+ .delete-form {
+     display: inline-block;
+ }
