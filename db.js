@@ -13,7 +13,7 @@ function getOne(id) {
 }
 
 function getAll() {
-    return db.any('select * from todos');
+    return db.any('select * from todos order by id');
 }
 
 function getPending() {
