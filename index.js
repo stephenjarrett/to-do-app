@@ -84,18 +84,18 @@ app.post('/:id/edit', (req, res) => {
         console.log('setting as finished');
         Todo.setFinished(id, isdone);
     } else {
-        console.log('Setting as not complete');
+        console.log('Setting as incomplete');
         Todo.setFinished(id,'false');
     }
 
     if (newTitle) {
         Todo.setTitle(id, newTitle)
             .then(() => {
-                res.redirect(`/${id}`);
+                res.redirect(`/`);
             })
     }
     else {
-        res.redirect(`/${id}`);
+        res.redirect(`/`);
     }
 });
 
