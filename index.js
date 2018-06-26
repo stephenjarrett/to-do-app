@@ -1,13 +1,16 @@
+const dotenv = require('dotenv');
+dotenv.config();
+
 const express = require('express');
 const app = express();
 const port = 3000;
 
+const setupAuth = require('./auth');
+const ensureAuthenticated = require('./auth').ensureAuthenticated;
+
 const Todo = require('./db');
 
 const expressHbs = require('express-handlebars');
-
-const staticMiddleware = express.static('public');
-app.use(staticMiddleware);
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -17,6 +20,11 @@ app.engine('.hbs', expressHbs({
     extname: '.hbs'
 }));
 app.set('view engine', '.hbs');
+
+const staticMiddleware = express.static('public');
+app.use(staticMiddleware);
+
+setupAuth(app);
 
 //grabs all tasks and displays them
 app.get('/', (req,res) => {
@@ -39,7 +47,8 @@ app.post('/', (req, res) => {
 });
 
 //route for a new task
-app.get('/new', (req, res) => {
+app.get('/new', ensureAuthenticated, (req, res) => {
+
     res.render('create-page');
 });
 
