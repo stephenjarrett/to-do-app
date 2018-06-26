@@ -32,7 +32,8 @@ app.get('/', (req,res) => {
         .then((data) => {
             // console.log(data);
             res.render('homepage', {
-                todos: data
+                todos: data,
+                isLoggedIn: req.isAuthenticated()
             });
         }).catch((error) => {
             res.send(error);
